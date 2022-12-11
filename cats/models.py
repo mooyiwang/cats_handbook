@@ -20,19 +20,19 @@ class Addr(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f'位置：{self.a_park}/{self.a_name}'
+        return f'{self.a_park}/{self.a_name}'
 
 
 class Cat(models.Model):
     c_id = models.AutoField(primary_key=True, verbose_name='猫咪编号')
     a = models.ForeignKey(Addr, models.DO_NOTHING, verbose_name='最近位置')
     s = models.ForeignKey('Sterilize', models.DO_NOTHING, blank=True, null=True, verbose_name='绝育编号')
-    s_bool = models.IntegerField(choices=[(1, '已绝育'), (0, '未绝育')], verbose_name='绝育状态')
+    s_bool = models.CharField(choices=[('已绝育', '已绝育'),  ('未绝育', '未绝育')], max_length=10, verbose_name='绝育状态')
     c_name = models.CharField(max_length=12, verbose_name='猫咪昵称')
-    c_sex = models.IntegerField(choices=[(1, '公'), (0, '母')], verbose_name='猫咪性别')
+    c_sex = models.CharField(choices=[('公', '公'), ('母', '母')], max_length=10, verbose_name='猫咪性别')
     c_look = models.CharField(max_length=4, verbose_name='猫咪外貌')
     c_icon = models.ImageField(upload_to='images/cats', null=True, blank=True, verbose_name='猫咪照片')
-    c_status = models.IntegerField(choices=[(2, '健康'), (1, '良好'), (0, '较差')], verbose_name='猫咪状态')
+    c_status = models.CharField(choices=[('健康', '健康'), ('良好', '良好'), ('较差', '较差')], max_length=10, verbose_name='猫咪状态')
     c_character = models.CharField(max_length=12, blank=True, null=True, verbose_name='猫咪性格')
     c_first = models.DateField(verbose_name='首次目击')
     c_recent = models.DateField(verbose_name='最近目击')
@@ -44,15 +44,16 @@ class Cat(models.Model):
         db_table = 'cat'
 
     def __str__(self):
-        return f'猫咪：{self.c_id}/{self.c_name}'
+        return f'{self.c_id}/{self.c_name}'
 
 
 class CatRel(models.Model):
     cr_id = models.AutoField(primary_key=True, verbose_name='关系编号')
     c_1 = models.ForeignKey(Cat, models.CASCADE, verbose_name='猫咪1', related_name='cat_1')
     c_2 = models.ForeignKey(Cat, models.CASCADE, verbose_name='猫咪2', related_name='cat_2')
-    r_type = models.IntegerField(choices=[(0, '父子'), (1, '母子'), (2, '兄弟'), (3, '姐妹'), (4, '朋友'), (5, '敌人')],
-                                 verbose_name='关系类型')
+    r_type = models.CharField(choices=[('父子', '父子'), ('母子', '母子'), ('兄弟', '兄弟'), ('姐妹', '姐妹'), ('朋友', '朋友'), ('敌人', '敌人')],
+                              max_length=10,
+                              verbose_name='关系类型')
 
     class Meta:
         db_table = 'cat_rel'
@@ -62,7 +63,7 @@ class CatRel(models.Model):
         ordering = ['cr_id']
 
     def __str__(self):
-        return f'猫咪关系：{self.c}和{self.cat_c}是{self.r_type}'
+        return f'{self.c_1}&{self.c_2}->{self.r_type}'
 
 
 class Checkcat(models.Model):
@@ -111,7 +112,7 @@ class Food(models.Model):
         db_table = 'food'
 
     def __str__(self):
-        return f'食品：{self.f_id}/{self.f_name}'
+        return f'{self.f_id}/{self.f_name}'
 
 
 class Sterilize(models.Model):
@@ -125,12 +126,13 @@ class Sterilize(models.Model):
         db_table = 'sterilize'
 
     def __str__(self):
-        return f'绝育：{self.s_id}/{self.s_time}'
+        return f'{self.s_time}'
 
 
 class Userinfo(models.Model):
     u_id = models.AutoField(primary_key=True, verbose_name='用户编号')
     u_name = models.CharField(max_length=12, verbose_name='用户名')
+    u_password = models.CharField(max_length=12, verbose_name='用户密码')
 
     class Meta:
         ordering = ['u_id']
@@ -139,4 +141,4 @@ class Userinfo(models.Model):
         db_table = 'userinfo'
 
     def __str__(self):
-        return f'用户：{self.u_id}/{self.u_name}'
+        return f'{self.u_id}/{self.u_name}'

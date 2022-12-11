@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <div class="container">
+        <div>
+            <h4><font color="white">昵称：{{cat.c_name}}</font> </h4>
+            <img src="{{ cat.c_icon.url }}" alt="Card image cap" height="200px" width="280px">
+            <h5><font color="white">性别：{{cat.c_sex}}</font></h5>
+            <h5><font color="white">外貌：{{cat.c_look}}</font></h5>
+            <h5><font color="white">性格：{{cat.c_character}}</font></h5>
+            <h5><font color="white">状况：{{cat.c_status}}</font></h5>
+            <h5><font color="white">绝育：{{cat.s_bool}}</font></h5>
+            {% if cat.s_bool == '已绝育' %}
+                <h5><font color="white">绝育日期：{{cat.s.s_time}}</font></h5>
+            {% endif %}
+            <h5><font color="white">首次目击：{{cat.c_first}}</font></h5>
+            <h5><font color="white">最近目击：{{cat.c_recent}}</font></h5>
+            <h5><font color="white">最近位置：{{cat.a}}</font></h5>
+        </div>
+
+        <div>
+            {% for c in cat_r %}
+            <a href="/cat?c_id={{c.c_2.c_id}}"><h5><font color="white">{{c.r_type}}:{{c.c_2.c_name}}</font></h5></a>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

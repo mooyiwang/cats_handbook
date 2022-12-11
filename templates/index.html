@@ -1,0 +1,10 @@
+
+
+{% for c in cats %}
+    <li>
+        {{c.c_id}}
+        {{c.c_name}}
+        {{c.c_look}}
+        <img class="card-img-top" src="{{ c.c_icon.url }}" alt="Card image cap" height="180px" width="320px">
+    </li>
+{% endfor %}

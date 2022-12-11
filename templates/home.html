@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <div class="container">
+        <div class="row">
+
+            {% for i in cats %}
+            <div class="col-lg-4 d-flex align-items-stretch">
+                <div class="card cardmodify cardbackground" style="width: 18rem;">
+<!--                    <div class="card-header">-->
+<!--                        -->
+<!--                    </div>-->
+                    <img class="card-img-top" src="{{ i.c_icon.url }}" alt="Card image cap" height="180px" width="320px">
+                    <div class="card-header" float="left">
+                        <h5><b>{{ i.c_name }}</b></h5>
+                        <h6><b>最近目击：{{ i.c_recent }}</b></h6>
+                        <h6><b>最近位置：{{ i.a }}</b></h6>
+                        <a href="/cat?c_id={{i.c_id}}" class="btn btn-success btn-sm addtocartbutton"><font size="3px">详情</font></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container formback">
+  <div class="loginform jumbotron">
+    <h3>投喂猫咪</h3>
+<!--    <div class="container">-->
+<!--        <div class="col-md-4 col-md-offset-4">-->
+          <form class='form-register' action="/feed/" method="post">
+              {% if message %}
+                  <div class="alert alert-success">{{ message }}</div>
+              {% endif %}
+
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="text-left">投喂猫咪:</div>
+                  {{ feed_form.cat }}
+              </div>
+              <div class="form-group">
+                  <div class="text-left">投喂位置：</div>
+                  {{ feed_form.addr }}
+              </div>
+              <div class="form-group">
+                  <div class="text-left">投喂食品：</div>
+                  {{ feed_form.food }}
+              </div>
+              <div class="form-group">
+                  <div class="text-left">投喂时间:</div>
+                  {{ feed_form.time }}
+              </div>
+
+              <button type="submit" class="btn btn-primary pull-right">保存</button>
+
+          </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

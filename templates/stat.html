@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container headerdiv">
+    <h4 class="headertext" align="center">猫咪统计</h4>
+</div>
+<style>
+    	.table th, .table td {
+    		text-align: center;
+    		vertical-align: middle!important;
+    	}
+</style>
+<div class="container jumbotron">
+    <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">猫咪编号</th>
+                <th scope="col">猫咪昵称</th>
+                <th scope="col">打卡次数</th>
+                <th scope="col">投喂次数</th>
+                <th scope="col">总次数</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in cat_list %}
+            <tr>
+                <td><b>{{ c.c_id }}</b></td>
+                <td><b>{{ c.c_name }}</b></td>
+                <td><b>{{ c.cc_time }}</b></td>
+                <td><b>{{ c.f_time }}</b></td>
+                <td><b>{{ c.time }}</b></td>
+            </tr>
+            {% empty %}
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cats'
+    'cats',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'Cat_Handbook.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cc4',  # 连接的数据库
+        'NAME': 'cc2',  # 连接的数据库
         'HOST': '127.0.0.1',    # mysql的ip地址
         'PORT': 3306,           # mysql的端口
         'USER': 'root',         # mysql的用户名
